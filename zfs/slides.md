@@ -139,12 +139,48 @@ It's what you would think it is.
 - Often used when disks need to be physically attached and detached 
 - `zpool replace`
 - `zpool offline`
-- `zpool offline`
+- `zpool online`
 
 ---
 # Resilvering
 - Initializes / updates a disk
 - Automatically starts `zpool replace` and `zpool online`
+
+---
+# My Zpool
+```
+❯ zpool status 
+  pool: para-z
+ state: ONLINE
+  scan: scrub repaired 0B in 08:56:27 with 0 errors on Sat Nov  8 20:51:43 2025
+config:
+
+	NAME                                            STATE     READ WRITE CKSUM
+	para-z                                          ONLINE       0     0     0
+	  raidz1-0                                      ONLINE       0     0     0
+	    wwn-0x5000039b02900d2d                      ONLINE       0     0     0
+	    wwn-0x5000cca8a8e3e364                      ONLINE       0     0     0
+	    usb-WDC_WD10_SPZX-22Z10T1_7D57812A1099-0:0  ONLINE       0     0     0
+
+errors: No known data errors
+```
+
+---
+# My ZFS datasets
+```
+❯ zfs list 
+NAME                                USED  AVAIL  REFER  MOUNTPOINT
+para-z                             1.46T   299G   394K  /mnt/para-z
+para-z/backups                      234K   299G   234K  /mnt/para-z/backups
+para-z/entertainment                125G   299G   125G  /mnt/para-z/entertainment
+para-z/immich                       244G   299G   208G  /mnt/para-z/immich
+para-z/immich-backup                250K   299G   250K  /mnt/para-z/immich-backup
+para-z/old-hard-drive-from-aazoba  89.4G   299G  89.4G  /mnt/para-z/old-hard-drive-from-aazoba
+para-z/para-save                    824G   299G   423G  /mnt/para-z/para-save
+para-z/seafile                      362K   299G   362K  /mnt/para-z/seafile
+para-z/sends                        215G   299G   215G  /mnt/para-z/sends
+para-z/test                         565K   299G   277K  /mnt/para-z/test
+```
 
 ---
 # Installing ZFS
@@ -161,3 +197,19 @@ It's what you would think it is.
 - [NixOS Wiki](https://wiki.nixos.org/wiki/ZFS)
 - [2.5 Admins Episode 256: Why ZFS](https://2.5admins.com/2-5-admins-256/)
 ![height:300px](./2.5admins.png)
+
+---
+# My server which runs ZFS
+![bg left:60%](./robo360.jpg)
+
+I couldn't find an up to date picture, but imagine 3 USB-attached 2.5" HDDs*
+
+\**2.5 Admins* strongly recommends **not** to run ZFS on USB drives due to instability.
+
+---
+# Inside my server which runs ZFS
+![bg left:70%](./robo360_inside.jpg)
+
+## FAQs
+**Do I have to open my laptop to run ZFS on it**
+No
